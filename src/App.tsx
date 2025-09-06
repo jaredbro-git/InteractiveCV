@@ -1,30 +1,36 @@
 import React, { useState } from "react";
-import ModernCV from "./views/ModernCV";
-import CICSCV from "./views/CICSCV";
+import { CICSCV } from "./views/CICSCV";
+import { ModernCV } from "./views/ModernCV";
 
-function App() {
-  const [view, setView] = useState<"modern" | "cics">("modern");
+export const App: React.FC = () => {
+  const [view, setView] = useState<"cics" | "modern">("modern");
 
   return (
-    <div>
-      <div className="p-4 flex gap-4">
+    <div className="app">
+      {/* Toggle buttons */}
+      <div className="flex justify-center mt-4 space-x-4">
         <button
+          className={`px-4 py-2 rounded ${
+            view === "modern" ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
           onClick={() => setView("modern")}
-          className={`px-4 py-2 rounded ${view === "modern" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
         >
-          Modern View
+          Modern CV
         </button>
         <button
+          className={`px-4 py-2 rounded ${
+            view === "cics" ? "bg-green-500 text-white" : "bg-gray-200"
+          }`}
           onClick={() => setView("cics")}
-          className={`px-4 py-2 rounded ${view === "cics" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
         >
-          CICS View
+          CICS CV
         </button>
       </div>
 
-      {view === "modern" ? <ModernCV /> : <CICSCV />}
+      {/* Render selected view */}
+      <div className="mt-6">
+        {view === "cics" ? <CICSCV /> : <ModernCV />}
+      </div>
     </div>
   );
-}
-
-export default App;
+};

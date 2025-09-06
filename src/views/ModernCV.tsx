@@ -1,82 +1,115 @@
+// src/views/ModernCV.tsx
 import React from "react";
 import { cvData } from "../data/cvData";
-import Header from "../components/Header";
 
-const ModernCV: React.FC = () => {
+export const ModernCV: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="modern-view fade-in min-h-screen px-4 sm:px-8 py-6 sm:py-8 bg-gray-50 text-gray-900 font-sans max-w-4xl mx-auto">
       {/* Header */}
-      <Header name={cvData.name} title={cvData.title} />
+      <header className="mb-10">
+        <h1 className="text-3xl sm:text-4xl font-bold">{cvData.name}</h1>
+        <h2 className="text-lg sm:text-xl text-gray-700">{cvData.title}</h2>
+      </header>
 
-      {/* About */}
-      <section className="my-6">
-        <h2 className="text-2xl font-semibold mb-2">About</h2>
-        <p className="text-gray-700">{cvData.about}</p>
+      {/* About Me */}
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          About Me
+        </h3>
+        <p className="text-gray-800 mt-2">{cvData.about}</p>
       </section>
 
       {/* Skills */}
-      <section className="my-6">
-        <h2 className="text-2xl font-semibold mb-2">Skills</h2>
-        <ul className="flex flex-wrap gap-3">
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          Skills
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {cvData.skills.map((skill, idx) => (
-            <li key={idx} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-              {skill.name} ({skill.level})
-            </li>
+            <div key={idx} className="flex flex-col">
+              <span className="bg-green-100 text-green-800 px-3 py-1 rounded shadow-sm text-center mb-1">
+                {skill.name} ({skill.level})
+              </span>
+              <div className="w-full bg-gray-200 rounded h-2">
+                <div
+                  className="bg-green-500 h-2 rounded transition-all duration-500"
+                  style={{ width: `${skill.levelPercentage}%` }}
+                ></div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* Experience */}
-      <section className="my-6">
-        <h2 className="text-2xl font-semibold mb-2">Experience</h2>
-        {cvData.experience.map((exp, idx) => (
-          <div key={idx} className="mb-4">
-            <h3 className="font-semibold">{exp.role} @ {exp.company}</h3>
-            <p className="text-gray-500 text-sm">{exp.startDate} - {exp.endDate || "Present"}</p>
-            <p className="text-gray-700">{exp.description}</p>
-          </div>
-        ))}
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          Experience
+        </h3>
+        <div className="space-y-4">
+          {cvData.experience.map((exp, idx) => {
+            const [open, setOpen] = React.useState(false);
+            return (
+              <div
+                key={idx}
+                onClick={() => setOpen(!open)}
+                className="w-full cursor-pointer p-4 bg-white rounded shadow hover:shadow-lg transition-shadow duration-200"
+              >
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-lg">{exp.role}</h4>
+                  <span className="text-blue-500 font-bold text-4xl select-none">
+                    {open ? "−" : "+"}
+                  </span>
+                </div>
+                <p className="text-gray-700">{exp.company}</p>
+                <span className="text-gray-500 text-sm">
+                  {exp.startDate} - {exp.endDate || "Present"}
+                </span>
+                {open && <p className="mt-2 text-gray-800">{exp.description}</p>}
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       {/* Projects */}
-      <section className="my-6">
-        <h2 className="text-2xl font-semibold mb-2">Projects</h2>
-        {cvData.projects.map((proj, idx) => (
-          <div key={idx} className="mb-3">
-            <h3 className="font-semibold">{proj.name}</h3>
-            <p className="text-gray-700">{proj.description}</p>
-          </div>
-        ))}
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          Projects
+        </h3>
+        <div className="space-y-3">
+          {cvData.projects.map((project, idx) => (
+            <div
+              key={idx}
+              className="w-full p-3 bg-yellow-100 rounded shadow-sm hover:shadow-md hover:scale-105 transition-transform duration-200">
+              <strong>{project.name}:</strong> {project.description}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Education */}
-      {cvData.education && (
-        <section className="my-6">
-          <h2 className="text-2xl font-semibold mb-2">Education</h2>
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          Education
+        </h3>
+        <div className="space-y-2">
           {cvData.education.map((edu, idx) => (
-            <div key={idx} className="mb-3">
-              <h3 className="font-semibold">{edu.degree} @ {edu.institution}</h3>
-              <p className="text-gray-500 text-sm">{edu.startDate} - {edu.endDate || "Present"}</p>
+            <div key={idx} className="w-full p-2 bg-red-100 rounded shadow-sm">
+              <strong>{edu.degree}</strong> @ {edu.institution} (
+              {edu.startDate} - {edu.endDate || "Present"})
             </div>
           ))}
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Hobbies */}
-      {cvData.hobbies && (
-        <section className="my-6">
-          <h2 className="text-2xl font-semibold mb-2">Hobbies</h2>
-          <ul className="flex flex-wrap gap-3">
-            {cvData.hobbies.map((hobby, idx) => (
-              <li key={idx} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                {hobby.name}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <section className="mb-8">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 border-b-2 border-blue-500 inline-block w-16">
+          Hobbies
+        </h3>
+        <p className="text-gray-800">{cvData.hobbies.map((h) => h.name).join(", ")}</p>
+      </section>
     </div>
   );
 };
-
-export default ModernCV;

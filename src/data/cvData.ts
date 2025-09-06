@@ -1,6 +1,7 @@
 export interface Skill {
   name: string;
   level: string; // e.g., "Expert", "Intermediate"
+  levelPercentage: number;
 }
 
 export interface Experience {
@@ -46,13 +47,13 @@ export const cvData: CVData = {
   title: "Mainframe Developer",
   about: "I am a passionate mainframe application developer with experience in COBOL, CICS, and modern web technologies.",
   skills: [
-    { name: "COBOL", level: "Intermediate" },
-    { name: "CICS", level: "Intermediate" },
-    { name: "SQL", level: "Intermediate"},
-    { name: "JCL", level: "Intermediate" },
-    { name: "Python", level: "Intermediate"},
-    { name: "TypeScript", level: "Intermediate" },
-    { name: "React", level: "Intermediate" },
+    { name: "COBOL", level: "Intermediate", levelPercentage: "85" },
+    { name: "CICS", level: "Intermediate", levelPercentage: "60" },
+    { name: "SQL", level: "Intermediate", levelPercentage: "75"},
+    { name: "JCL", level: "Intermediate", levelPercentage: "55" },
+    { name: "Python", level: "Intermediate", levelPercentage: "80" },
+    { name: "TypeScript", level: "Intermediate", levelPercentage: "65" },
+    { name: "React", level: "Intermediate", levelPercentage: "50" },
   ],
   experience: [
     {

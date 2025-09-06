@@ -1,5 +1,5 @@
 /* index.css */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,10 +7,14 @@
 
 
 body {
-  background-color: black;
-  color: #00ff00;
   font-family: 'IBM Plex Mono', monospace;
 }
+
+.cics-view {
+  background-color: black;
+  color: #00FF00;
+}
+
 
 button {
   font-family: 'IBM Plex Mono', monospace;
@@ -19,4 +23,28 @@ button {
 div {
   line-height: 1.4;
 }
+
+.whitespace-pre-line {
+  white-space: pre-line; /* preserves line breaks in content */
+}
+
+.flash {
+  background-color: #ffffffff;
+  color: black;
+  transition: none; /* instant */
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.bg-primary { background-color: #f0f4f8; }   /* section background */
+.text-primary { color: #111827; }           /* headings & main text */
+.text-accent { color: #3b82f6; }            /* skill bars, plus/minus */
+.bg-accent-light { background-color: #dbecff; } /* skill tags, project cards */
 
