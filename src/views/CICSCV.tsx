@@ -97,9 +97,8 @@ export const CICSCV: React.FC = () => {
               </div>
             </div>
           )}
-
-          <div className="mt-4 border-t border-green-400 pt-2 text-green-400 text-sm flex justify-between">
-            <div className="fkeys mt-4 flex justify-between text-sm">
+          <div className="mt-4 border-t border-green-400 pt-2 text-green-400 text-sm">
+            <div className="fkeys flex flex-wrap justify-between gap-2 text-sm">
               {footerLabels.map((item, idx) => (
                 <span
                   key={idx}
@@ -108,7 +107,8 @@ export const CICSCV: React.FC = () => {
                     item.actionType === "normal"
                       ? openSection(item.index)
                       : item.handler && item.handler()
-                  }>
+                  }
+                >
                   {item.key} {item.label}
                 </span>
               ))}
