@@ -1,0 +1,22 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  background-color: black;
+  color: #00ff00;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+button {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+div {
+  line-height: 1.4;
+}
+
